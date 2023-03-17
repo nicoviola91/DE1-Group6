@@ -5,11 +5,31 @@ services:
     image: spark-master
     ports:
       - "8080:8080"
-      - "7077:7077"
+    expose:
+      - "7077"
+    networks:
+      - spark-cluster
   workernode:
     build: ./worker/
-    image: spark-worker
+    image: sparkworker
     ports:
       - "8081-8090:8080"
+      - "7337:7337"
     depends_on:
       - masternode
+    environment:
+      - SPARK_MASTER=spark://spark-master:7077
+      - SPARK_WORKER_CORES=4
+    networks:
+      - spark-cluster
+  jupyternode:
+    build: ./jupyter-setup/
+    hostname: jupyter
+    image: jupyter-node
+    ports:
+      - "8888-8900:8888"
+    networks:
+      - spark-cluster
+
+networks:
+  spark-cluster:

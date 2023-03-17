@@ -1,0 +1,17 @@
+services:
+  masternode:
+    build: ./master/
+    hostname: sparkmaster
+    image: spark-master
+    ports:
+      - "8080:8080"
+      - "7077:7077"
+  workernode:
+    build: ./worker/
+    image: spark-worker
+    ports:
+      - "8081-8090:8080"
+    depends_on:
+      - masternode
+    #expose:
+      #- "7337"
