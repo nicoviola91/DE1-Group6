@@ -7,7 +7,8 @@ RUN apt install -y wget
 RUN apt install -y screen
 RUN apt-get -y install net-tools
 RUN apt-get install -y python3-pip
-RUN pip3 install pyspark===3.2.3 
+#RUN apt-get install -y python3-pandas
+RUN pip3 install pyspark===3.3.2 
 RUN pip3 install notebook
 RUN apt install -y curl
 RUN apt-get -y install git
@@ -20,5 +21,5 @@ RUN export PATH=$PATH:/opt/gradle/gradle-8.0.2/bin
 RUN git clone https://github.com/mongodb/mongo-spark.git
 # RUN cd mongo-spark
 # RUN ./gradlew clean check
-EXPOSE 8888
+#EXPOSE 8888
 CMD jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token=
