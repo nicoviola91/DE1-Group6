@@ -25,7 +25,7 @@ services:
   jupyternode:
     build: ./jupyter-setup/
     hostname: jupyter
-    image: jupyter-node
+    image: jupyter
     ports:
       - "8888-8900:8888"
     networks:
