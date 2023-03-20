@@ -3,33 +3,39 @@ services:
     build: ./master/
     hostname: sparkmaster
     image: spark-master
+    cpus: 2
+    mem_limit: 2G
     ports:
       - "8080:8080"
     expose:
       - "7077"
-    networks:
-      - spark-cluster
+#    networks:
+#      - spark-cluster
   workernode:
     build: ./worker/
     image: sparkworker
+    cpus: 2
+    mem_limit: 2G
     ports:
-      - "8081-8090:8080"
+      - "8081-8088:8080"
       - "7337:7337"
     depends_on:
       - masternode
     environment:
       - SPARK_MASTER=spark://spark-master:7077
       - SPARK_WORKER_CORES=4
-    networks:
-      - spark-cluster
+#    networks:
+#      - spark-cluster
   jupyternode:
-    build: ./jupyter-setup/
+    #build: ./jupyter-setup/
     hostname: jupyter
-    image: jupyter-node
+    image: jupyter
+    cpus: 3
+    mem_limit: 3G
     ports:
       - "8888-8900:8888"
-    networks:
-      - spark-cluster
+#    networks:
+#      - spark-cluster
 
-networks:
-  spark-cluster:
+#networks:
+#  spark-cluster:
