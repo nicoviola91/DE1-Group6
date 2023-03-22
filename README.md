@@ -6,7 +6,7 @@
 2. Do <code>docker-compose up –build</code>.
 3. Go to localhost/8888 for jupyter, if it’s not there you need to find the port by doing <code>docker-compose ps</code> and look for the jupyter node.
 
-#### Data analys
+#### Data analysis
 The files that we used for analyzing are in /data-analysis.
 
 #### Architecture
